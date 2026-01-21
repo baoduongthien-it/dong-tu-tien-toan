@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>Bảng Phong Thần - Động Tu Tiên Toán</title>
+    <meta
+      name="title"
+      content="Bảng Phong Thần - Động Tu Tiên Toán"
+    />
+    <meta
+      name="description"
+      content="Hệ thống xếp hạng tu tiên dành cho các đạo hữu tại Động Tu Tiên Toán. Theo dõi lộ trình tu hành, công đức và bảng xếp hạng thiên kiêu."
+    />
+    <meta
+      name="keywords"
+      content="Tu Tiên Toán, Bảng Phong Thần, Học Toán, Giao Diện Đẹp, Tu Tiên"
+    />
+    <meta
+      name="author"
+      content="Động Tu Tiên Toán"
+    />
+
+    <!-- Open Graph / Facebook / Zalo -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:url"
+      content="https://baoduongthien-it.github.io/dong-tu-tien-toan/"
+    />
+    <meta
+      property="og:title"
+      content="Bảng Phong Thần - Động Tu Tiên Toán"
+    />
+    <meta
+      property="og:description"
+      content="Hệ thống xếp hạng tu tiên dành cho các đạo hữu tại Động Tu Tiên Toán. Theo dõi lộ trình tu hành và bảng xếp hạng thiên kiêu."
+    />
+    <meta
+      property="og:image"
+      content="https://baoduongthien-it.github.io/dong-tu-tien-toan/assets/background.png"
+    />
+
+    <!-- Twitter -->
+    <meta
+      property="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      property="twitter:url"
+      content="https://baoduongthien-it.github.io/dong-tu-tien-toan/"
+    />
+    <meta
+      property="twitter:title"
+      content="Bảng Phong Thần - Động Tu Tiên Toán"
+    />
+    <meta
+      property="twitter:description"
+      content="Hệ thống xếp hạng tu tiên dành cho các đạo hữu tại Động Tu Tiên Toán. Theo dõi lộ trình tu hành và bảng xếp hạng thiên kiêu."
+    />
+    <meta
+      property="twitter:image"
+      content="https://baoduongthien-it.github.io/dong-tu-tien-toan/assets/background.png"
+    />
+
+    <!-- Theme Color -->
+    <meta
+      name="theme-color"
+      content="#ffd700"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Ma+Shan+Zheng&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="assets/favicon.ico"
+      type="image/x-icon"
+    />
+    <style>
+      :root {
+        --primary-gold: #ffd700;
+        --secondary-gold: #b8860b;
+        --mystic-purple: #8b5cf6;
+        --deep-space: #0b0e14;
+        --energy-cyan: #22d3ee;
+        --energy-green: #4ade80;
+        --divine-white: #ffffff;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--deep-space);
+        color: #e2e8f0;
+        overflow-x: hidden;
+        background-image: linear-gradient(
+            rgba(11, 14, 20, 0.85),
+            rgba(11, 14, 20, 0.85)
+          ),
+          url("assets/background.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .font-mystic {
+        font-family: "Ma Shan Zheng", cursive;
+      }
+
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 215, 0, 0.15);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+      }
+
+      .gold-border {
+        border: 1px solid transparent;
+        background: linear-gradient(var(--deep-space), var(--deep-space))
+            padding-box,
+          linear-gradient(
+              135deg,
+              rgba(184, 134, 11, 0.5),
+              rgba(255, 215, 0, 0.8),
+              rgba(184, 134, 11, 0.5)
+            )
+            border-box;
+      }
+
+      .text-glow {
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+      }
+
+      /* Celestial Path Styles */
+      .path-container {
+        position: relative;
+        padding-left: 3rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .path-line {
+        position: absolute;
+        left: 1.25rem;
+        top: 2rem;
+        bottom: 2rem;
+        width: 4px;
+        background: linear-gradient(
+          to bottom,
+          var(--divine-white),
+          var(--primary-gold) 15%,
+          var(--secondary-gold) 30%,
+          var(--mystic-purple) 50%,
+          var(--energy-cyan) 70%,
+          var(--energy-green) 85%,
+          #64748b
+        );
+        border-radius: 2px;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+      }
+
+      .path-line::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        background-size: 100% 300px;
+        animation: pulse-energy 4s linear infinite;
+      }
+
+      @keyframes pulse-energy {
+        0% {
+          background-position: 0 -300px;
+        }
+        100% {
+          background-position: 0 1000px;
+        }
+      }
+
+      .level-node {
+        position: relative;
+        margin-bottom: 3rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+      }
+
+      .level-node::before {
+        content: "";
+        position: absolute;
+        left: -2.35rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background: var(--deep-space);
+        border: 3px solid currentColor;
+        z-index: 10;
+        box-shadow: 0 0 20px currentColor;
+        transition: all 0.3s ease;
+      }
+
+      .level-node:hover::before {
+        transform: translateY(-50%) scale(1.3);
+        background: currentColor;
+      }
+
+      .level-node:hover {
+        transform: translateX(10px);
+      }
+
+      .node-content {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .level-node:hover .node-content {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: currentColor;
+        box-shadow: 0 0 30px -10px currentColor;
+      }
+
+      /* Tier Colors */
+      .tier-divine {
+        color: #ffffff;
+      }
+      .tier-immortal {
+        color: #ffd700;
+      }
+      .tier-void {
+        color: #60a5fa;
+      }
+      .tier-spirit {
+        color: #a78bfa;
+      }
+      .tier-mortal {
+        color: #4ade80;
+      }
+
+      .rank-gold {
+        color: #ffd700;
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+      }
+      .rank-silver {
+        color: #e2e8f0;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+      }
+      .rank-bronze {
+        color: #fb923c;
+        filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.3));
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .scroll-custom::-webkit-scrollbar {
+        width: 5px;
+      }
+      .scroll-custom::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .scroll-custom::-webkit-scrollbar-thumb {
+        background: rgba(255, 215, 0, 0.2);
+        border-radius: 10px;
+      }
+      .scroll-custom::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-gold);
+      }
+
+      /* Bi Kip Styles */
+      .quest-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 4px solid var(--primary-gold);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+      }
+      .quest-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen p-4 sm:p-8 md:p-12">
+    <!-- Header -->
+    <header class="text-center mb-10 md:mb-20 floating">
+      <h1
+        class="font-mystic text-5xl sm:text-7xl md:text-9xl text-glow mb-4 text-yellow-500 tracking-tighter"
+      >
+        Bảng Phong Thần
+      </h1>
+      <div class="flex items-center justify-center space-x-4">
+        <div
+          class="h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent w-24"
+        ></div>
+        <p class="text-gray-400 italic text-xl tracking-[0.3em] uppercase">
+          Động Tu Tiên Toán • Thiên Cơ Hiện
+        </p>
+        <div
+          class="h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent w-24"
+        ></div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto space-y-12">
+      <!-- Top Row: Leaderboard & Cultivation Path -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Left Column: Leaderboard -->
+        <section class="lg:col-span-7">
+          <div
+            class="glass-panel rounded-[3rem] p-10 h-full gold-border relative overflow-hidden"
+          >
+            <div
+              class="absolute -top-24 -left-24 w-64 h-64 bg-yellow-500/5 rounded-full blur-[100px]"
+            ></div>
+            <h2
+              class="font-mystic text-5xl text-yellow-500 mb-10 flex items-center"
+            >
+              <span class="mr-4 text-4xl">✨</span> Thiên Kiêu Báo Danh
+            </h2>
+            <div
+              id="leaderboard"
+              class="space-y-6"
+            >
+              <!-- Data will be rendered here by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Column: Cultivation Path -->
+        <section class="lg:col-span-5">
+          <div
+            class="glass-panel rounded-[3rem] p-10 h-full gold-border flex flex-col relative overflow-hidden"
+          >
+            <div
+              class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-500/5 rounded-full blur-[100px]"
+            ></div>
+            <h2
+              class="font-mystic text-5xl text-yellow-500 mb-12 flex items-center text-glow"
+            >
+              <span class="mr-4">📜</span> Thiên Lộ Cảnh Giới
+            </h2>
+            <div class="flex-grow overflow-y-auto scroll-custom pr-4">
+              <div
+                id="cultivation-path"
+                class="path-container"
+              >
+                <div class="path-line"></div>
+                <!-- Data will be rendered here by JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Bottom Row: How to Earn Points (Bi Kip Cong Duc) -->
+      <section class="w-full">
+        <div
+          class="glass-panel rounded-[3rem] p-10 gold-border relative overflow-hidden"
+        >
+          <h2
+            class="font-mystic text-5xl text-yellow-500 mb-10 flex items-center"
+          >
+            <span class="mr-4 text-4xl">📜</span> Bí Kíp Công Đức (Cày Điểm)
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Task Category 1 -->
+            <div>
+              <h3
+                class="text-xl font-bold text-yellow-500 mb-4 border-b border-yellow-500/20 pb-2"
+              >
+                📚 Học Tập Chi Lộ
+              </h3>
+              <div class="quest-card rounded-r-xl">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Làm bài tập đầy đủ</span>
+                  <span class="text-yellow-400 font-bold">+50 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Hoàn thành nhiệm vụ môn hạ giao mỗi ngày.
+                </p>
+              </div>
+              <div class="quest-card rounded-r-xl">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Phát biểu xây bài</span>
+                  <span class="text-yellow-400 font-bold">+20 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Đóng góp ý kiến khi đàm đạo trên lớp.
+                </p>
+              </div>
+              <div class="quest-card rounded-r-xl">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Kiểm tra (9+)</span>
+                  <span class="text-yellow-400 font-bold">+200 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Khi đạt cảnh giới cao trong khảo thí.
+                </p>
+              </div>
+            </div>
+
+            <!-- Task Category 2 -->
+            <div>
+              <h3
+                class="text-xl font-bold text-blue-400 mb-4 border-b border-blue-400/20 pb-2"
+              >
+                🤝 Đồng Môn Phò Trợ
+              </h3>
+              <div
+                class="quest-card rounded-r-xl"
+                style="border-left-color: #60a5fa"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Giúp bạn học tập</span>
+                  <span class="text-blue-400 font-bold">+100 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Hỗ trợ đệ tử khác hiểu đạo pháp khó.
+                </p>
+              </div>
+              <div
+                class="quest-card rounded-r-xl"
+                style="border-left-color: #60a5fa"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Hoạt động nhóm</span>
+                  <span class="text-blue-400 font-bold">+50 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Phối hợp tinh thông cùng đội ngũ.
+                </p>
+              </div>
+            </div>
+
+            <!-- Task Category 3 -->
+            <div>
+              <h3
+                class="text-xl font-bold text-green-400 mb-4 border-b border-green-400/20 pb-2"
+              >
+                ⛩️ Tông Môn Quy Củ
+              </h3>
+              <div
+                class="quest-card rounded-r-xl"
+                style="border-left-color: #4ade80"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Đi học đúng giờ</span>
+                  <span class="text-green-400 font-bold">+30 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Không trễ giờ lâm triều.
+                </p>
+              </div>
+              <div
+                class="quest-card rounded-r-xl"
+                style="border-left-color: #4ade80"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-white">Trực nhật sạch sẽ</span>
+                  <span class="text-green-400 font-bold">+40 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Giữ gìn vệ sinh đạo tràng.
+                </p>
+              </div>
+              <div
+                class="quest-card rounded-r-xl"
+                style="border-left-color: #ef4444"
+              >
+                <div class="flex justify-between items-start text-red-500">
+                  <span class="font-bold">Vi phạm nội quy</span>
+                  <span class="font-bold">-100 EXP</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Làm ảnh hưởng thanh danh tông môn.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mt-24 text-center">
+      <div class="flex items-center justify-center space-x-8 opacity-40 mb-6">
+        <div
+          class="h-px bg-gradient-to-r from-transparent to-yellow-500 flex-grow max-w-[100px]"
+        ></div>
+        <div class="text-yellow-500 text-2xl">☯</div>
+        <div
+          class="h-px bg-gradient-to-l from-transparent to-yellow-500 flex-grow max-w-[100px]"
+        ></div>
+      </div>
+      <p class="text-gray-500 text-sm tracking-[0.4em] font-light">
+        © 2026 ĐỘNG TU TIÊN TOÁN • THIÊN KIÊU HỘI TỤ • PHI THĂNG TIÊN GIỚI
+      </p>
+    </footer>
+
+    <script>
+      // DATA JSON
+      const cultivationData = {
+        students: [
+          {
+            name: "Huyền Diệu",
+            exp: 66,
+            avatarImage: "assets/avatar-mac-dinh.jfif",
+          },
+          {
+            name: "Anh Khoa",
+            exp: 66,
+            avatarImage: "assets/avatar-mac-dinh.jfif",
+          },
+          {
+            name: "Phạm Gia Khiêm",
+            exp: 66,
+            avatarImage: "assets/avatar-mac-dinh.jfif",
+          },
+          {
+            name: "Tâm Như",
+            exp: 66,
+            avatarImage: "assets/avatar-mac-dinh.jfif",
+          },
+          {
+            name: "Bích Trâm",
+            exp: 0,
+            avatarImage: "assets/avatar-mac-dinh.jfif",
+          },
+          {
+            name: "Nguyễn Ngọc",
+            exp: 0,
+            avatarImage: "assets/avatar-mac-dinh.jfif",
+          },
+        ],
+        levels: [
+          {
+            id: 9,
+            name: "Độ Kiếp",
+            range: "12k+",
+            minExp: 12000,
+            title: "Chuẩn Tiên Nhân",
+            reward: "Vé Phi Thăng: Phần thưởng cập nhật sau",
+            icon: "💎",
+            tier: "tier-divine",
+            colorClass: "bg-white text-black",
+          },
+          {
+            id: 8,
+            name: "Đại Thừa",
+            range: "8k - 12k",
+            minExp: 8000,
+            title: "Thái Thượng Trưởng Lão",
+            reward: "Pháp Bảo Trấn Tông: Bình giữ nhiệt cao cấp + Voucher 50k",
+            icon: "⚔️",
+            tier: "tier-immortal",
+            colorClass: "bg-yellow-500 text-black",
+          },
+          {
+            id: 7,
+            name: "Hợp Thể",
+            range: "5k5 - 8k",
+            minExp: 5500,
+            title: "Phó Tông Chủ",
+            reward: "Linh Tiên Yến: Tiệc Pizza/Gà rán cùng đồng bọn",
+            icon: "🍗",
+            tier: "tier-immortal",
+            colorClass: "bg-yellow-600 text-white",
+          },
+          {
+            id: 6,
+            name: "Luyện Hư",
+            range: "3k5 - 5k5",
+            minExp: 3500,
+            title: "Đại Trưởng Lão",
+            reward: "Thần Thông Phù: Combo Bánh quy & Thẻ miễn bài tập",
+            icon: "📜",
+            tier: "tier-void",
+            colorClass: "bg-blue-500 text-white",
+          },
+          {
+            id: 5,
+            name: "Hóa Thần",
+            range: "2k - 3k5",
+            minExp: 2000,
+            title: "Trưởng Lão",
+            reward: "Linh Trà Cao Cấp: Trà sữa Full Topping (Size L)",
+            icon: "🍵",
+            tier: "tier-void",
+            colorClass: "bg-blue-600 text-white",
+          },
+          {
+            id: 4,
+            name: "Nguyên Anh",
+            range: "1k2 - 2k",
+            minExp: 1200,
+            title: "Chân Truyền Đệ Tử",
+            reward: "Tẩy Tủy Đan: Túi quà bánh kẹo & Thẻ xóa điểm thấp",
+            icon: "💊",
+            tier: "tier-spirit",
+            colorClass: "bg-purple-500 text-white",
+          },
+          {
+            id: 3,
+            name: "Kết Đan",
+            range: "600 - 1k2",
+            minExp: 600,
+            title: "Nội Môn Đệ Tử",
+            reward: "Linh Trà Sơ Cấp: Ly trà sữa (Size M)",
+            icon: "🥤",
+            tier: "tier-spirit",
+            colorClass: "bg-purple-600 text-white",
+          },
+          {
+            id: 2,
+            name: "Trúc Cơ",
+            range: "200 - 600",
+            minExp: 200,
+            title: "Ngoại Môn Đệ Tử",
+            reward: "Bổ Não Đan: Hộp bánh gấu & Sữa tươi",
+            icon: "🍬",
+            tier: "tier-mortal",
+            colorClass: "bg-green-500 text-white",
+          },
+          {
+            id: 1,
+            name: "Luyện Khí",
+            range: "0 - 200",
+            minExp: 0,
+            title: "Tân Thủ",
+            reward: "Linh Quả Sơ Cấp: Gói snack & Kẹo mút",
+            icon: "🍭",
+            tier: "",
+            colorClass: "bg-slate-700 text-white",
+            customStyle: "color: #64748b",
+          },
+        ],
+      };
+
+      function getStudentStats(exp) {
+        const level =
+          cultivationData.levels.find((l) => exp >= l.minExp) ||
+          cultivationData.levels[cultivationData.levels.length - 1];
+        return {
+          levelName: level.name,
+          title: level.title,
+        };
+      }
+
+      function renderLeaderboard() {
+        const container = document.getElementById("leaderboard");
+
+        // Sort students by EXP descending
+        const sortedStudents = [...cultivationData.students].sort(
+          (a, b) => b.exp - a.exp
+        );
+
+        // Calculate ranks (students with same EXP get same rank)
+        const maxExp = sortedStudents.length > 0 ? sortedStudents[0].exp : 0;
+        let currentRank = 1;
+        const studentsWithStats = sortedStudents.map((student, index) => {
+          if (index > 0 && student.exp < sortedStudents[index - 1].exp) {
+            currentRank = index + 1;
+          }
+          return {
+            ...student,
+            calculatedRank: currentRank,
+            isCalculatedTop: student.exp === maxExp && student.exp > 0,
+            stats: getStudentStats(student.exp),
+          };
+        });
+
+        const top3 = studentsWithStats.slice(0, 3);
+        const rest = studentsWithStats.slice(3);
+
+        let html = top3
+          .map(
+            (student) => `
+                <div class="flex flex-col sm:flex-row items-center sm:items-center p-4 sm:p-6 bg-white/5 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-all cursor-pointer group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center font-mystic text-4xl sm:text-5xl ${getRankClass(
+                      student.calculatedRank
+                    )} mb-4 sm:mb-0 sm:mr-6">${student.calculatedRank}</div>
+                    <div class="relative mb-4 sm:mb-0">
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full ${getAvatarGradient(
+                          student.calculatedRank
+                        )} p-1 sm:mr-6 overflow-hidden border-2 ${getBorderColor(
+              student.calculatedRank
+            )} shadow-lg group-hover:scale-110 transition-transform">
+                            <img src="${
+                              student.avatarImage ||
+                              `https://api.dicebear.com/7.x/avataaars/svg?seed=${
+                                student.avatarSeed || "default"
+                              }`
+                            }" alt="Avatar" class="bg-slate-800 rounded-full w-full h-full object-cover">
+                        </div>
+                        ${
+                          student.isCalculatedTop
+                            ? '<div class="absolute -bottom-1 -right-1 sm:right-5 bg-yellow-500 text-black text-[8px] sm:text-[10px] font-black px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border-2 border-slate-900 shadow-lg whitespace-nowrap">ĐỨNG ĐẦU</div>'
+                            : ""
+                        }
+                    </div>
+                    <div class="flex-grow text-center sm:text-left">
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white group-hover:text-yellow-400 transition-colors">${
+                          student.name
+                        }</h3>
+                        <p class="text-xs sm:text-sm text-yellow-500/60 font-medium tracking-[0.2em] uppercase mt-1">${
+                          student.stats.title
+                        }</p>
+                    </div>
+                    <div class="mt-4 sm:mt-0 text-center sm:text-right">
+                        <div class="${getLevelColor(
+                          student.stats.levelName
+                        )} font-bold text-2xl sm:text-3xl font-mystic">${
+              student.stats.levelName
+            }</div>
+                        <div class="text-[10px] text-gray-500 uppercase tracking-[0.3em] mt-1 sm:mt-2">${student.exp.toLocaleString()} Càn Khôn</div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+
+        html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                ${rest
+                  .map(
+                    (student) => `
+                    <div class="flex items-center p-5 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-all group">
+                        <div class="w-12 h-12 flex items-center justify-center font-mystic text-3xl text-gray-600 mr-4">${
+                          student.calculatedRank
+                        }</div>
+                        <img src="${
+                          student.avatarImage ||
+                          `https://api.dicebear.com/7.x/avataaars/svg?seed=${
+                            student.avatarSeed || "default"
+                          }`
+                        }" class="w-14 h-14 rounded-full mr-4 bg-slate-800 object-cover">
+                        <div>
+                            <h4 class="text-xl font-bold text-white">${
+                              student.name
+                            }</h4>
+                            <p class="text-xs ${getLevelColor(
+                              student.stats.levelName,
+                              true
+                            )} font-bold uppercase tracking-widest">${
+                      student.stats.levelName
+                    }</p>
+                        </div>
+                    </div>
+                `
+                  )
+                  .join("")}
+            </div>`;
+
+        container.innerHTML = html;
+      }
+
+      function renderCultivationPath() {
+        const container = document.getElementById("cultivation-path");
+        const levelsHtml = cultivationData.levels
+          .map(
+            (level) => `
+                <div class="level-node ${level.tier}" style="${
+              level.customStyle || ""
+            }">
+                    <div class="node-content p-4 sm:p-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-3">
+                            <h4 class="text-2xl sm:text-3xl font-mystic tracking-widest ${
+                              level.tier === "tier-divine" ? "text-white" : ""
+                            }">${level.name}</h4>
+                            <span class="text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded ${
+                              level.colorClass
+                            } mt-2 sm:mt-0">${level.range}</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs opacity-70 font-bold tracking-wider mb-2 uppercase">${
+                          level.title
+                        }</p>
+                        <div class="${
+                          level.tier === "tier-divine"
+                            ? "bg-white/10"
+                            : "bg-white/5"
+                        } p-2 rounded-lg border border-white/10">
+                            <p class="text-[10px] sm:text-[11px] leading-relaxed font-medium">
+                                <span class="text-base sm:text-lg mr-2">${
+                                  level.icon
+                                }</span> <b>${
+              level.reward.split(":")[0]
+            }:</b> ${level.reward.split(":")[1]}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+
+        container.innerHTML = '<div class="path-line"></div>' + levelsHtml;
+      }
+
+      function getRankClass(rank) {
+        if (rank === 1) return "rank-gold";
+        if (rank === 2) return "rank-silver";
+        if (rank === 3) return "rank-bronze";
+        return "text-gray-600";
+      }
+
+      function getAvatarGradient(rank) {
+        if (rank === 1)
+          return "bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700";
+        if (rank === 2) return "bg-gradient-to-br from-gray-300 to-gray-500";
+        if (rank === 3)
+          return "bg-gradient-to-br from-orange-400 to-orange-700";
+        return "bg-slate-700";
+      }
+
+      function getBorderColor(rank) {
+        if (rank === 1) return "border-yellow-400";
+        if (rank === 2) return "border-gray-400";
+        if (rank === 3) return "border-orange-500";
+        return "border-white/10";
+      }
+
+      function getLevelColor(level, isPill = false) {
+        if (level === "Nguyên Anh")
+          return isPill ? "text-purple-400/70" : "text-yellow-400";
+        if (level === "Kết Đan")
+          return isPill ? "text-purple-400/70" : "text-purple-400";
+        if (level === "Trúc Cơ")
+          return isPill ? "text-green-400/70" : "text-green-400";
+        return isPill ? "text-slate-500" : "text-slate-400";
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderLeaderboard();
+        renderCultivationPath();
+      });
+    </script>
+  </body>
+</html>
