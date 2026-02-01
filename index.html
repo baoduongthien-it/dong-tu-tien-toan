@@ -536,31 +536,37 @@
             name: "Huyền Diệu",
             exp: 146,
             avatarImage: "assets/avatar-mac-dinh.jfif",
+            title: "Đệ tử nội môn",
           },
           {
             name: "Anh Khoa",
             exp: 146,
             avatarImage: "assets/avatar-mac-dinh.jfif",
+            title: "Đệ tử nội môn",
           },
           {
             name: "Phạm Gia Khiêm",
             exp: 176,
             avatarImage: "assets/avatar-mac-dinh.jfif",
+            title: "Đệ tử nội môn",
           },
           {
             name: "Tâm Như",
             exp: 116,
             avatarImage: "assets/avatar-mac-dinh.jfif",
+            title: "Đệ tử nội môn",
           },
           {
             name: "Bích Trâm",
             exp: 80,
             avatarImage: "assets/avatar-mac-dinh.jfif",
+            title: "Đệ tử nội môn",
           },
           {
             name: "Nguyễn Ngọc",
-            exp: 20,
+            exp: 50,
             avatarImage: "assets/avatar-mac-dinh.jfif",
+            title: "Đệ tử ngoại môn",
           },
         ],
         levels: [
@@ -569,7 +575,6 @@
             name: "Độ Kiếp",
             range: "12k+",
             minExp: 12000,
-            title: "Chuẩn Tiên Nhân",
             reward: "Vé Phi Thăng: Cập nhật sau!",
             icon: "💎",
             tier: "tier-divine",
@@ -580,7 +585,6 @@
             name: "Đại Thừa",
             range: "8k - 12k",
             minExp: 8000,
-            title: "Thái Thượng Trưởng Lão",
             reward: "Pháp Bảo Trấn Tông: Cập nhật sau!",
             icon: "⚔️",
             tier: "tier-immortal",
@@ -591,7 +595,6 @@
             name: "Hợp Thể",
             range: "5k5 - 8k",
             minExp: 5500,
-            title: "Phó Tông Chủ",
             reward: "Linh Tiên Yến: Cập nhật sau!",
             icon: "🍗",
             tier: "tier-immortal",
@@ -602,7 +605,6 @@
             name: "Luyện Hư",
             range: "3k5 - 5k5",
             minExp: 3500,
-            title: "Đại Trưởng Lão",
             reward: "Thần Thông Phù: Cập nhật sau!",
             icon: "📜",
             tier: "tier-void",
@@ -613,7 +615,6 @@
             name: "Hóa Thần",
             range: "2k - 3k5",
             minExp: 2000,
-            title: "Trưởng Lão",
             reward: "Linh Trà Cao Cấp: Cập nhật sau!",
             icon: "🍵",
             tier: "tier-void",
@@ -624,7 +625,6 @@
             name: "Nguyên Anh",
             range: "1k2 - 2k",
             minExp: 1200,
-            title: "Chân Truyền Đệ Tử",
             reward: "Tẩy Tủy Đan: Cập nhật sau!",
             icon: "💊",
             tier: "tier-spirit",
@@ -635,7 +635,6 @@
             name: "Kết Đan",
             range: "600 - 1k2",
             minExp: 600,
-            title: "Nội Môn Đệ Tử",
             reward: "Linh Trà Sơ Cấp: Cập nhật sau!",
             icon: "🥤",
             tier: "tier-spirit",
@@ -646,7 +645,6 @@
             name: "Trúc Cơ",
             range: "200 - 600",
             minExp: 200,
-            title: "Ngoại Môn Đệ Tử",
             reward: "Bổ Não Đan: Cập nhật sau!",
             icon: "🍬",
             tier: "tier-mortal",
@@ -657,7 +655,6 @@
             name: "Luyện Khí",
             range: "0 - 200",
             minExp: 0,
-            title: "Tân Thủ",
             reward: "Linh Quả Sơ Cấp: Cập nhật sau!",
             icon: "🍭",
             tier: "",
@@ -667,13 +664,13 @@
         ],
       };
 
-      function getStudentStats(exp) {
+      function getStudentStats(student) {
         const level =
-          cultivationData.levels.find((l) => exp >= l.minExp) ||
+          cultivationData.levels.find((l) => student.exp >= l.minExp) ||
           cultivationData.levels[cultivationData.levels.length - 1];
         return {
           levelName: level.name,
-          title: level.title,
+          title: student.title,
         };
       }
 
@@ -696,7 +693,7 @@
             ...student,
             calculatedRank: currentRank,
             isCalculatedTop: student.exp === maxExp && student.exp > 0,
-            stats: getStudentStats(student.exp),
+            stats: getStudentStats(student),
           };
         });
 
@@ -769,12 +766,18 @@
                             <h4 class="text-xl font-bold text-white">${
                               student.name
                             }</h4>
-                            <p class="text-xs ${getLevelColor(
-                              student.stats.levelName,
-                              true
-                            )} font-bold uppercase tracking-widest">${
+                            <div class="flex items-center space-x-2">
+                                <p class="text-[10px] ${getLevelColor(
+                                  student.stats.levelName,
+                                  true
+                                )} font-bold uppercase tracking-widest">${
                       student.stats.levelName
                     }</p>
+                                <span class="text-[10px] text-gray-500">•</span>
+                                <p class="text-[10px] text-yellow-500/60 uppercase tracking-wider font-medium">${
+                                  student.stats.title
+                                }</p>
+                            </div>
                         </div>
                     </div>
                 `
